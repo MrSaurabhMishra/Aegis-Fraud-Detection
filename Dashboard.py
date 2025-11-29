@@ -17,7 +17,7 @@ placeholder = st.empty()
 while True:
     try:
         # 1. Fetch recent data
-        # नया डेटाबेस स्कीमा अपने आप नए कॉलम्स (hour, frequency) ले आएगा
+        # The new database schema will automatically include new columns (hour, frequency)
         query = "SELECT * FROM transactions ORDER BY timestamp DESC LIMIT 200"
         df = pd.read_sql(query, engine)
         
@@ -41,7 +41,7 @@ while True:
                 
                 with col1:
                     st.subheader("Transaction Analysis")
-                    # अपडेटेड चार्ट: Tooltip में नए फीचर्स भी दिखाएं
+                    # Updated Chart: Show new features in Tooltip
                     chart = alt.Chart(df).mark_circle(size=60).encode(
                         x='timestamp',
                         y='amount',
@@ -52,19 +52,19 @@ while True:
                     
                 with col2:
                     st.subheader("Recent Logs (Live)")
-                    # अपडेटेड टेबल: नए कॉलम्स (Hour, Frequency) को डिस्प्ले में शामिल किया
+                    # Updated Table: Included new columns (Hour, Frequency) in display
                     display_cols = ['timestamp', 'amount', 'distance_km', 'hour', 'frequency', 'status']
-                    # अगर पुराने डेटाबेस में ये कॉलम नहीं हैं तो एरर से बचने के लिए चेक
+                    # Check to avoid error if these columns are not in old database
                     cols_to_show = [c for c in display_cols if c in df.columns]
                     st.dataframe(df[cols_to_show].head(15))
         else:
             with placeholder.container():
                 st.warning("Waiting for data... Start the 'simulation/producer.py' script.")
                 
-        time.sleep(1) # तेज़ रिफ्रेश के लिए 1 सेकंड
+        time.sleep(1) # 1 second for fast refresh
 
     except Exception as e:
-        # अगर डेटाबेस लॉक है या कनेक्ट नहीं हो पा रहा
+        # If database is locked or unable to connect
         with placeholder.container():
             st.error(f"Database connecting... ({e})")
         time.sleep(2)

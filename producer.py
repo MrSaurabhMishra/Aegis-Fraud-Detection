@@ -6,8 +6,8 @@ import uuid
 API_URL = "http://localhost:8000/predict"
 
 def generate_transaction():
-    is_fraud = random.random() < 0.15 # 15% fraud chance
-    
+    is_fraud = random.random() < 0.035 # 3.5% fraud chance
+
     # Default Normal Behavior
     amount = round(random.uniform(10, 500), 2)
     dist = round(random.uniform(1, 20), 2)
