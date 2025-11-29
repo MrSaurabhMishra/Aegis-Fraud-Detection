@@ -60,3 +60,56 @@ Aegis-Fraud-Detection/
 │   ├── aegis.db          # 🗄️ SQLite Database (Auto-generated)
 │   └── model             # 📦 Serialized ML Model (Auto-generated)
 └── README.md             # 📄 Documentation
+
+#How to Run the Project
+Follow these steps to launch the entire system on your local machine.
+
+Step 1: Train the Model 🧠
+Generate synthetic data (including new Time/Frequency patterns) and train the model.
+
+Bash
+
+Model/model.py
+# Output: ✅ Advanced Model saved to model
+Step 2: Start the API Server 🚀
+Launch the FastAPI backend. This will also create the database aegis.db.
+
+Bash
+
+Model/api.py
+# Output: Uvicorn running on [http://0.0.0.0:8000](http://0.0.0.0:8000)
+Step 3: Start Transaction Simulation 📡
+Open a new terminal and run the producer to generate live traffic.
+
+Bash
+
+Model/producer.py
+# Output: 🔴 Blocked: Suspicious Time | 🟢 Approved ...
+Step 4: Launch the Dashboard 📊
+Open a third terminal to visualize the data in real-time.
+
+Bash
+
+streamlit run Model/Dashboard.py
+📊 Dashboard Preview
+The dashboard provides real-time insights into the system's performance:
+
+Live KPI Metrics: Total Transactions, Fraud Rate, Blocked Counts.
+
+Interactive Scatter Plot: Visualizes normal vs. anomalous transactions based on Amount, Time, and Distance.
+
+Live Logs: A scrolling table of the most recent API decisions.
+
+🔮 Future Scope
+Deep Learning: Implementing LSTM/Autoencoders for sequence-based fraud detection.
+
+Geolocation API: Integration with Google Maps API for real coordinates.
+
+Notification System: Email/SMS alerts for high-risk transactions.
+
+👨‍💻 Author
+Name: [Saurabh Mishra]
+
+Role: Data Science & Machine Learning Intern
+
+Project: Aegis Fraud Detection System
